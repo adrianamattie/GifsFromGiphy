@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>GIPHY</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Around the world</h1>
+        <div id="countryButtons"></div>
+
+        <div id="gifs-appear-here">
+        </div>
+        <div class="form-inline" id="countryGenerator">
+            <label for="country-input">Add an country you'd like to visit!</label>
+            <br />
+            <input class="form-control" type="text" placeholder="Country" id="country-input"></input>
+            <input class="btn btn-primary" type="submit" id="addCountry" value="submit"></input>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src=""></script>
+    <script src=""></script>
+    <script>
+        $(document).ready(function () {
+                    $(".addCountry").on("click", function () {
+                                countryButtons()
+                                // var Country = $(this).attr("data-country");
+
+                                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topics[i] +
+                                    "&api_key=LOiWpyNG9zSgLRjbizFmrZZRBP3X1p4d=10";
+
+                                $.ajax({
+                                    url: queryURL,
+                                    method: "GET"
+                                }).then(function (response) {
+                                    var results = response.data;
+
+                                    for (var i = 0; i < topics.length; i++) {
+
+                                        var topics = ["Australia", "England", "Canada", "Scotland", "Ireland",
+                                            "Israel", "Sydney", "Toronto",
+                                        ]
+                                        var btn = $("<button>");
+                                        btn.addClass("Country");
+                                        btn.attr("data-name", topics[i]);
+                                        btn.text(topics[i]);
+                                        $("#countryButtons").append(btn);
+                                    }
+
+
+
+                                    var countryDiv = $("<div>");
+                                    // Creating a paragraph tag with the result item's rating 
+                                    var p = $("<p>").text("Rating:" + results[i].rating);
+                                    // Creating and storing an image tag 
+                                    var countryImage = $('<img src = "' + results[i].images.fixed_height.url + '" >');
+                                    // Setting the src attribute of the image to a property pulled off the result item 
+                                    countryImage.attr("src", results[i].images.fixed_height.url);
+                                    // Appending the paragraph and image tag to the animalDiv animalDiv.append(p);
+                                    countryDiv.append(countryImage);
+                                    // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div 
+                                    $("#gifs-appear-here").prepend(animalDiv);
+
+
+
+                                });
+                    }
+    </script>
+</body>
+
+</html>

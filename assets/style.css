@@ -1,0 +1,17 @@
+
+#countryGenerator {
+    float: right;
+}
+label {
+    padding: 10px;
+    clear: both;
+}
+
+body {
+    background-color:lightblue;
+}
+
+h1 {
+    padding: 10px;
+}
+

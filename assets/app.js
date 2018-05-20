@@ -29,7 +29,6 @@ $(document).ready(function () {
         buttons.addClass("addOnClick");
         buttons.attr("data-name", buttonName);
         buttons.attr("class", "btn btn-primary");
-        buttons.attr("id", "newBtn");
         buttons.text(buttonName)
         $("#countryButtons").append(buttons);
     }
@@ -79,7 +78,10 @@ function playGifs() {
     });
 }
  $("button").on("click", function () {
+    
      playGifs();
  });
+ 
+ $(document).on("click", ".btn", playGifs);
 
 });

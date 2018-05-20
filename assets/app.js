@@ -37,26 +37,22 @@ $(document).ready(function () {
 
 
     $("#addBtn").click(function () {
-        if (buttonName == "") {
-            break;
-            console.log("Nothing was entered")
-        } else {
             event.preventDefault();
             buttonName = $("#country-input").val().trim();
             console.log(buttonName);
             addButtons();
-        }
+        
     });
 
 
 
-});
 
-function showGifs() {
+$("button").on("click", function () {
+ $("#gifs-appear-here").empty();
 
     var country = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        person + "&api_key=dc6zaTOxFJmzC&limit=20";
+        country + "&api_key=dc6zaTOxFJmzC&limit=20";
     // saying grab 20 gifs
     $.ajax({
             url: queryURL,
@@ -82,11 +78,9 @@ function showGifs() {
                 console.log(results[i].images.fixed_height.url);
             }
         });
-};
+});
 
-  $("button").on("click", function () {
-       event.preventDefault();
-      alert("Hello");
-   showGifs();
-  });
+});
+
+ 
 

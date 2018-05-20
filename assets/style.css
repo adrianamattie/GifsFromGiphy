@@ -1,7 +1,7 @@
 
-#countryGenerator {
+/* #countryGenerator {
     float: right;
-}
+} */
 label {
     padding: 10px;
     clear: both;
@@ -13,5 +13,13 @@ body {
 
 h1 {
     padding: 10px;
+}
+
+.btn {
+    margin: 10px;
+}
+
+.textStyle {
+    font-weight: 600;
 }
 

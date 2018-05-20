@@ -6,7 +6,7 @@ $(document).ready(function () {
         "Israel", "Sydney", "Toronto",
     ];
 
-    var newCountries;
+
     var buttonName = "";
 
     function showButtons() {
@@ -35,52 +35,51 @@ $(document).ready(function () {
     }
 
 
-
     $("#addBtn").click(function () {
-            event.preventDefault();
-            buttonName = $("#country-input").val().trim();
-            console.log(buttonName);
-            addButtons();
-        
+        event.preventDefault();
+        buttonName = $("#country-input").val().trim();
+        console.log(buttonName);
+        addButtons();
+
     });
 
 
+function playGifs() {
 
+    $("button").on("click", function () {
+        $("#gifs-appear-here").empty();
 
-$("button").on("click", function () {
- $("#gifs-appear-here").empty();
+        var country = $(this).attr("data-name");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+            country + "&api_key=dc6zaTOxFJmzC&limit=20";
+        // saying grab 20 gifs
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function (response) {
+                var results = response.data;
 
-    var country = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        country + "&api_key=dc6zaTOxFJmzC&limit=20";
-    // saying grab 20 gifs
-    $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-        .then(function (response) {
-            var results = response.data;
+                for (var i = 0; i < results.length; i++) {
+                    var gifDiv = $("<div class='item'>");
 
-            for (var i = 0; i < results.length; i++) {
-                var gifDiv = $("<div class='item'>");
+                    var rating = results[i].rating;
 
-                var rating = results[i].rating;
+                    var p = $("<p>").text("Rating: " + rating);
 
-                var p = $("<p>").text("Rating: " + rating);
+                    var countryImage = $("<img>");
+                    countryImage.attr("src", results[i].images.fixed_height.url);
 
-                var countryImage = $("<img>");
-                countryImage.attr("src", results[i].images.fixed_height.url);
+                    gifDiv.prepend(p);
+                    gifDiv.prepend(countryImage);
 
-                gifDiv.prepend(p);
-                gifDiv.prepend(countryImage);
+                    $("#gifs-appear-here").prepend(gifDiv);
+                }
+            });
+    });
+}
+ $("button").on("click", function () {
+     playGifs();
+ });
 
-                $("#gifs-appear-here").prepend(gifDiv);
-                console.log(results[i].images.fixed_height.url);
-            }
-        });
 });
-
-});
-
- 
-

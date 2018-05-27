@@ -57,9 +57,9 @@ $(document).ready(function () {
 
         // saying grab 20 gifs
         $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
+            url: queryURL,
+            method: "GET"
+        })
             .then(function (response) {
                 var results = response.data;
 
